@@ -1,0 +1,71 @@
+body {
+  font-family: sans-serif;
+  background: #0a1a47;
+  background-attachment: fixed;
+}
+
+.container {
+  min-height: 100%;
+}
+
+header {
+  color: #0a1a47;
+  background: #fee407;
+  padding: 20px 15px 15px 15px;
+  position: relative;
+}
+
+h1 {
+  font-size: 1.5em;
+  margin: 0;
+  margin-bottom: 10px;
+  display: inline-block;
+  margin-right: 1em;
+}
+
+form {
+  margin-top: 10px;
+  margin-bottom: -10px;
+  position: relative;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  background: #001245;
+  color: #fee407;
+  font-size: 18px;
+}
+
+.member {
+  list-style: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: black solid 1px;
+}
+
+.member .delete {
+  background: none;
+  border: none;
+}
+
+.member.inactive {
+  color: #888;
+}
+
+.member.inactive .text {
+  text-decoration: line-through;
+}
+
+.member .coffee {
+  background: none;
+  border: none;
+}
+.member .time {
+  float: right;
+}
+
+.member .time .badge {
+  background-color: #fee407;
+  color: #0a1a47;
+}
