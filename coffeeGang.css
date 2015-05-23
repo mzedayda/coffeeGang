@@ -32,16 +32,16 @@ form {
 ul {
   margin: 0;
   padding: 0;
-  background: #001245;
-  color: #fee407;
-  font-size: 18px;
 }
 
 .member {
+  background: #001245;
+  color: #fee407;
   list-style: none;
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: black solid 1px;
+  font-size: 18px;
 }
 
 .member .delete {
