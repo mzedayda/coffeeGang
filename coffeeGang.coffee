@@ -9,8 +9,12 @@ Router.route '/members/:name', ->
 if Meteor.isClient
   Meteor.loginWithPassword "guest", "guest", (err) ->
     console.error err if err
+  
   adminView = ->
     Meteor.user()?.username is 'Admin'
+  dateToString = (date) ->
+    return "#{date.getDate()}/#{date.getMonth()+1}/#{date.getFullYear() % 100}"
+
   Template.mainLayout.helpers
     members: ->
       if Session.get('showInactive')
@@ -22,7 +26,6 @@ if Meteor.isClient
     username: ->
       Meteor.user()?.username
     adminView: -> adminView()
-    guestView: -> !adminView()
   Template.mainLayout.events
     'submit .to-admin': (event) ->
       password = event.target.password.value
@@ -30,10 +33,10 @@ if Meteor.isClient
         Meteor.loginWithPassword "Admin", password, (err) ->
           console.error err if err
       event.target.password.value = ''
-      false
+      return false
     'click #logout-btn': (event) ->
       Meteor.loginWithPassword "guest", "guest"
-      false
+      return false
     'submit .new-member': (event) ->
       return false unless Meteor.user()?.username is 'Admin'
       name = event.target.name.value
@@ -44,10 +47,10 @@ if Meteor.isClient
           dates: []
           createdAt: new Date()
       event.target.name.value = ''
-      false
+      return false
     'change .show-inactive input': (event) ->
       Session.set 'showInactive', event.target.checked
-      return
+      return false
   Template.members.helpers
     members: -> 
       if Session.get('showInactive')
@@ -55,10 +58,9 @@ if Meteor.isClient
       else
         return Members.find { active: $ne: false }, sort: lastCoffee: 1
     adminView: -> adminView()
-    guestView: -> not adminView()
   memberRowHelpers =
     lastCoffeeDate: ->
-      "#{@lastCoffee.getDate()}/#{@lastCoffee.getMonth()+1}/#{@lastCoffee.getFullYear() % 100}"
+      return dateToString @lastCoffee
     lastCoffeeDaysSince: ->
       return 0 unless @lastCoffee?
       Math.round (new Date() - @lastCoffee) / 1000 / 60 / 60 / 24
@@ -69,20 +71,24 @@ if Meteor.isClient
     'click .toggle-active': ->
       return false unless Meteor.user()?.username is 'Admin'
       Members.update @_id, $set: active: !@active
-      return
+      return false
     'click .delete': ->
       return false unless Meteor.user()?.username is 'Admin'
       Members.remove @_id
-      return
+      return false
     'click .coffee': ->
       return false unless Meteor.user()?.username is 'Admin'
       date = new Date()
       Members.update @_id, {$push: {dates: date}, $set: {lastCoffee: date}}
-      return
+      return false
   Template.memberRow.helpers memberRowHelpers
   Template.memberRow.events memberRowEvents
   Template.memberRowAdmin.helpers memberRowHelpers
   Template.memberRowAdmin.events memberRowEvents
+  memberRowHelpers.dates = ->
+    return @dates.reverse()
+  memberRowHelpers.dateToString = ->
+    return dateToString @
   Template.member.helpers memberRowHelpers
 
 if Meteor.isServer

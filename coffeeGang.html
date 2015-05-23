@@ -8,20 +8,19 @@
 <template name="mainLayout">
   <div class="container col-md-8 col-md-offset-2 col-xs-12">
     <header class="row">
-      <h1>Coffee Gang ({{username}})</h1>
+      <a href="/"><h1>Coffee Gang ({{username}})</h1></a>
       {{#if adminView}}<button class="btn btn-primary" id="logout-btn">Logout</button>{{/if}}
         <label class="show-inactive">
           <input type="checkbox" checked="{{showInactive}}" />
           Show Inactive Members
         </label>
-      {{#if guestView}}
-        <form class="to-admin">
-          <input class="form-control" type="password" name="password" placeholder="Type in admin password" />
-        </form>
-      {{/if}}
       {{#if adminView}}
         <form class="new-member">
           <input class="form-control" type="text" name="name" placeholder="Type to add new member" />
+        </form>
+      {{else}}
+        <form class="to-admin">
+          <input class="form-control" type="password" name="password" placeholder="Type in admin password" />
         </form>
       {{/if}}
     </header>
@@ -34,18 +33,17 @@
 <template name="members">
   <ul>
     {{#each members}}
-      {{#if guestView}}
-        {{> memberRow}}
-      {{/if}}
       {{#if adminView}}
         {{> memberRowAdmin}}
+      {{else}}
+        {{> memberRow}}
       {{/if}}
     {{/each}}
   </ul>
 </template>
 
 <template name="memberRow">
-  <li class="member row {{#if inactive}}inactive{{/if}}">
+  <a href="/members/{{name}}"><li class="member row {{#if inactive}}inactive{{/if}}">
     <div class="col-md-8 col-xs-6">
       <span class="text name">{{name}}</span>
     </div>
@@ -55,11 +53,11 @@
       <span class="text badge">{{lastCoffeeDaysSince}}</span>
       </div>
     </div>
-  </li>
+  </li></a>
 </template>
 
 <template name="memberRowAdmin">
-  <li class="member row {{#if inactive}}inactive{{/if}}">
+  <a href="/members/{{name}}"><li class="member row {{#if inactive}}inactive{{/if}}">
     <div class="col-md-2 col-xs-12">
       <input type="checkbox" checked="{{active}}" class="toggle-active" />
       <button class="coffee"><i class="fa fa-coffee"></i></button>
@@ -76,17 +74,17 @@
         </div>
       </div>
     </div>
-  </li>
+  </li></a>
 </template>
 
 <template name="member">
-  <div class="row" style="font-size: 100px; color: #fee407; text-align: center;">
+  <div class="row" style="font-size: 85px; color: #fee407; text-align: center;">
     <div class="col-md-4">{{name}}</div>
-    <div class="col-md-4" style="color: #001245; background-color: #fee407;">{{lastCoffeeDaysSince}} d since last</div>
+    <div class="col-md-4" style="color: #001245; background-color: #fee407;">{{lastCoffeeDaysSince}} d Since Last</div>
     <div class="col-md-4">
       <ul class="row">
         {{#each dates}}
-          <li class="col-md-12 large" style="font-size: 50px; list-style: none; color: #fee407;">{{this}}</li>
+          <li class="col-md-12 large" style="font-size: 50px; list-style: none; color: #fee407;">{{dateToString}}</li>
         {{/each}}
       </ul>
     </div>
