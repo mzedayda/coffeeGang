@@ -6,6 +6,9 @@ Router.route '/', ->
 Router.route '/members/:name', ->
   @render 'member', {data: -> return Members.findOne {name: this.params.name}}
 
+Router.route('/members', { where: 'server' }).get ->
+  @response.end JSON.stringify Members.find({}, fields: {_id: false}).fetch()
+
 if Meteor.isClient
   Meteor.loginWithPassword "guest", "guest", (err) ->
     console.error err if err
@@ -101,91 +104,8 @@ if Meteor.isServer
       username: "guest"
       password: "guest"
     Members.remove {}
-    Members.insert
-      name: "Netanel"
-      active: false
-      dates: [new Date("07-11-2013Z"), new Date("11-07-2013Z"), new Date("04-01-2014Z")]
-      lastCoffee: new Date("04-01-2014Z")
-      createdAt: new Date()
-    Members.insert
-      name: "Ohad"
-      active: true
-      dates: [new Date("02-17-2014Z"), new Date("08-26-2014Z"), new Date("03-22-2015Z")]
-      lastCoffee: new Date("03-22-2015Z")
-      createdAt: new Date()
-    Members.insert
-      name: "Anna"
-      active: true
-      dates: [new Date("02-16-2014Z"), new Date("08-21-2014Z"), new Date("03-08-2015Z")]
-      lastCoffee: new Date("03-08-2015Z")
-      createdAt: new Date()
-    Members.insert
-      name: "Motti"
-      active: false
-      dates: [new Date("07-08-2013Z"), new Date("10-13-2013Z"), new Date("01-19-2014Z"), new Date("06-15-2014Z"), new Date("06-15-2014Z")]
-      lastCoffee: new Date("06-15-2014Z")
-      createdAt: new Date()
-    Members.insert
-      name: "Bumi"
-      active: true
-      dates: [new Date("06-10-2013Z"), new Date("09-29-2013Z"), new Date("12-23-2013Z"), new Date("05-26-2014Z"), new Date("11-20-2014Z"), new Date("04-15-2015Z")]
-      lastCoffee: new Date("04-15-2015Z")
-      createdAt: new Date()
-    Members.insert
-      name: "Ron"
-      active: true
-      dates: [new Date("05-12-2013Z"), new Date("08-13-2013Z"), new Date("11-26-2013Z"), new Date("04-13-2014Z"), new Date("10-20-2014Z"), new Date("04-01-2015Z")]
-      lastCoffee: new Date("04-01-2015Z")
-      createdAt: new Date()
-    Members.insert
-      name: "Lior"
-      active: false
-      dates: [new Date("01-20-2014Z")]
-      lastCoffee: new Date("01-20-2014Z")
-      createdAt: new Date()
-    Members.insert
-      name: "Yael"
-      active: true
-      dates: [new Date("08-04-2014Z"), new Date("02-18-2015Z")]
-      lastCoffee: new Date("02-18-2015Z")
-      createdAt: new Date()
-    Members.insert
-      name: "Hetan"
-      active: true
-      dates: [new Date("01-04-2015Z"), new Date("05-04-2015Z")]
-      lastCoffee: new Date("05-04-2015Z")
-      createdAt: new Date()
-    Members.insert
-      name: "Nastia"
-      active: true
-      dates: [new Date("01-20-2015Z")]
-      lastCoffee: new Date("01-20-2015Z")
-      createdAt: new Date()
-    Members.insert
-      name: "Leora"
-      active: true
-      dates: [new Date("01-11-2015Z")]
-      lastCoffee: new Date("01-11-2015Z")
-      createdAt: new Date()
-    Members.insert
-      name: "Shiluz"
-      active: true
-      dates: [new Date("02-03-2015Z")]
-      lastCoffee: new Date("02-03-2015Z")
-      createdAt: new Date()
-    Members.insert
-      name: "Shir A."
-      active: false
-      dates: [new Date("03-03-2015Z")]
-      lastCoffee: new Date("03-03-2015Z")
-      createdAt: new Date()
-    Members.insert
-      name: "Yuval"
-      active: true
-      dates: [new Date("05-11-2015Z")]
-      lastCoffee: new Date("05-11-2015Z")
-      createdAt: new Date()
+    for member in share.seed.members
+      Members.insert member
   Meteor.startup ->
-    # code to run on server at startup
     seed()
     return
