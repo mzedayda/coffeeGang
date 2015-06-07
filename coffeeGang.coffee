@@ -104,7 +104,11 @@ if Meteor.isServer
       username: "guest"
       password: "guest"
     Members.remove {}
-    for member in share.seed.members
+    members = JSON.parse Assets.getText "members.json"
+    for member in members or []
+      member.lastCoffee = new Date member.lastCoffee
+      for date, index in member.dates
+        member.dates[index] = new Date date
       Members.insert member
   Meteor.startup ->
     seed()
