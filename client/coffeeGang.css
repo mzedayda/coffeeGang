@@ -69,3 +69,20 @@ ul {
   background-color: #fee407;
   color: #0a1a47;
 }
+
+.memberDetails {
+  font-size: 85px;
+  color: #fee407;
+  text-align: center;
+}
+
+.memberDetails .sinceLast {
+  color: #001245;
+  background-color: #fee407;
+}
+
+.memberDetails .date {
+  font-size: 50px;
+  list-style: none;
+  color: #fee407;
+}
