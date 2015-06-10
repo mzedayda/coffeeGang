@@ -1,0 +1,31 @@
+<head>
+  <title>coffeeGang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
+<body>
+</body>
+
+<template name="mainLayout">
+  <div class="container col-md-8 col-md-offset-2 col-xs-12">
+    <header class="row">
+      <a href="/"><h1>Coffee Gang ({{username}})</h1></a>
+      {{#if adminView}}<button class="btn btn-primary" id="logout-btn">Logout</button>{{/if}}
+        <label class="show-inactive">
+          <input type="checkbox" checked="{{showInactive}}" />
+          Show Inactive Members
+        </label>
+      {{#if adminView}}
+        <form class="new-member">
+          <input class="form-control" type="text" name="name" placeholder="Type to add new member" />
+        </form>
+      {{else}}
+        <form class="to-admin">
+          <input class="form-control" type="password" name="password" placeholder="Type in admin password" />
+        </form>
+      {{/if}}
+    </header>
+    <div class="">
+      {{> yield}}
+    </div>
+  </div>
+</template>

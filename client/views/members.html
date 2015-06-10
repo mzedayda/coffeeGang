@@ -1,0 +1,46 @@
+<template name="members">
+  <ul>
+    {{#each members}}
+      {{#if adminView}}
+        {{> memberRowAdmin}}
+      {{else}}
+        {{> memberRow}}
+      {{/if}}
+    {{/each}}
+  </ul>
+</template>
+
+<template name="memberRow">
+  <a href="/members/{{name}}"><li class="member row {{#if inactive}}inactive{{/if}}">
+    <div class="col-md-8 col-xs-6">
+      <span class="text name">{{name}}</span>
+    </div>
+    <div class="col-md-4 col-xs-6">
+      <div class="time small">
+      <span class="text">{{lastCoffeeDate}}</span>
+      <span class="text badge">{{lastCoffeeDaysSince}}</span>
+      </div>
+    </div>
+  </li></a>
+</template>
+
+<template name="memberRowAdmin">
+  <a href="/members/{{name}}"><li class="member row {{#if inactive}}inactive{{/if}}">
+    <div class="col-md-2 col-xs-12">
+      <input type="checkbox" checked="{{active}}" class="toggle-active" />
+      <button class="coffee"><i class="fa fa-coffee"></i></button>
+      <button class="delete"><i class="fa fa-trash-o"></i></button>
+    </div>
+    <div class="row col-md-10 col-xs-12">
+      <div class="col-md-8 col-xs-6">
+        <span class="text name col-md-6">{{name}}</span>
+      </div>
+      <div class="col-md-4 col-xs-6">
+        <div class="time small">
+        <span class="text">{{lastCoffeeDate}}</span>
+        <span class="text badge">{{lastCoffeeDaysSince}}</span>
+        </div>
+      </div>
+    </div>
+  </li></a>
+</template>

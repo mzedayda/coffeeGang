@@ -1,0 +1,13 @@
+<template name="member">
+  <div class="row" style="font-size: 85px; color: #fee407; text-align: center;">
+    <div class="col-md-4">{{name}}</div>
+    <div class="col-md-4" style="color: #001245; background-color: #fee407;">{{lastCoffeeDaysSince}} d Since Last</div>
+    <div class="col-md-4">
+      <ul class="row">
+        {{#each dates}}
+          <li class="col-md-12 large" style="font-size: 50px; list-style: none; color: #fee407;">{{dateToString}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</template>
