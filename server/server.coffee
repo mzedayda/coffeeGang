@@ -7,7 +7,8 @@ Meteor.startup ->
 
 seed = ->
   datify = (member) ->
-    member.lastCoffee = new Date member.lastCoffee
+    if member.lastCoffee?
+      member.lastCoffee = new Date member.lastCoffee
     for date, index in member.dates
       member.dates[index] = new Date date
     return member
@@ -20,7 +21,7 @@ seed = ->
     username: "guest"
     password: "guest"
   
-  Members.remove {}
-  members = JSON.parse Assets.getText "members.json"
-  for member in members or []
-    Members.insert datify member
+  unless Members.findOne()?
+    members = JSON.parse Assets.getText "members.json"
+    for member in members or []
+      Members.insert datify member

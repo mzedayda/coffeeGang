@@ -55,9 +55,9 @@ Template.members.helpers
   adminView: -> adminView()
 memberRowHelpers =
   lastCoffeeDate: ->
-    return dateToString @lastCoffee
+    if @lastCoffee? then return dateToString @lastCoffee else return ''
   lastCoffeeDaysSince: ->
-    return 0 unless @lastCoffee?
+    return '∞' unless @lastCoffee?
     Math.round (new Date() - @lastCoffee) / 1000 / 60 / 60 / 24
   inactive: ->
     not @active
