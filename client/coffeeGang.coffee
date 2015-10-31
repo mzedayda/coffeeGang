@@ -106,16 +106,16 @@ Template.emailForm.events
     event.preventDefault();
     sendBtn = $("#send-email").button('sending')
     Meteor.call 'sendEmail', (err, result) ->
-      if result.statusCode is 200
+      if result?.statusCode is 200
         sendBtn.button('sent')
         setTimeout ->
           sendBtn.button('reset')
         , 2000
-      else if result.statusCode is 400
+      else if result?.statusCode is 400
         sendBtn.button('reset')
         $('#alertMessage').text result.body
         alert = $('.alert').show()
         setTimeout ->
           alert.hide()
-        , 1500
+        , 3000
     return false

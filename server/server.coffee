@@ -37,6 +37,7 @@ Meteor.methods
     return {statusCode: 400, body: "An Email reminder was recently sent, don't spam!"} unless now - internals.lastReminder > internals.minWait
     member = Members.findOne { active: true }, sort: lastCoffee: 1
     return {statusCode: 400, body: "Error: No active members"} unless member?
+    return {statusCode: 400, body: "Error: We don't know #{member.name}'s email :( . Blame Hetan"} unless member.email?
     line1 = "Hi #{member.name},\nOur precious coffee is running out and your turn is up.\nPlease bring a new package a soon as possible, thanks!"
     line2 = "Visit coffeegang.meteor.com for more information"
     line3 = "This mail was sent to #{member.email} by the coffeegang app by @mzedayda"
