@@ -1,7 +1,10 @@
-body {
-  font-family: sans-serif;
+body,
+select {
   background: #0a1a47;
   background-attachment: fixed;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: #001245;
 }
 
 .container {
@@ -17,16 +20,12 @@ header {
 
 h1 {
   font-size: 1.5em;
-  margin: 0;
   margin-bottom: 10px;
-  display: inline-block;
-  margin-right: 1em;
+  text-align: center;
 }
 
 form {
-  margin-top: 10px;
-  margin-bottom: -10px;
-  position: relative;
+  margin: 0 30px;
 }
 
 ul {
@@ -85,4 +84,99 @@ ul {
   font-size: 50px;
   list-style: none;
   color: #fee407;
+}
+
+form .addon {
+  background-color: #fee506;
+}
+
+hr {
+  color: #fee506;
+  opacity: 0.3;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 300;
+  color: #fee407;
+  text-align: center;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
+.show-inactive {
+  color: #676D7D;
+}
+
+.show-inactive .checked {
+  color: #0a1a47;
+}
+
+#navbar {
+  border: transparent;
+  border-top: 1px solid #001245;
+  background: #fee506;
+  border-radius: 0px;
+  margin-bottom: 0px;
+  min-height: 10px;
+}
+
+#navbar #navbar-ul {
+  width: 100%;
+}
+
+#navbar li {
+  text-align: center;
+  font-size: 20px;
+  padding: 10px 5px;
+  width: 33.3333333%;
+}
+
+#navbar li .nav-detail { font-size: 16px; }
+
+#navbar li:hover {
+  background-color: #E6D21E;
+}
+
+#navbar li .nav-detail { display: none; }
+#navbar li:hover .nav-icon { display: none; }
+#navbar li:hover .nav-detail { display: inline; }
+
+#to-admin-input {
+  padding: 3px 12px;
+  height: 100%;
+}
+
+form.to-admin {
+  margin: 0px;
+}
+
+#navbar li.admin-btn {
+  width: 16.6666666%;
+}
+
+.btn-maccabi {
+  background: #fee506;
+  color: #0a1a47;
+  border-color: #000000;
+}
+
+.btn-maccabi:hover,
+.btn-maccabi:focus,
+.btn-maccabi.focus,
+.btn-maccabi:active,
+.btn-maccabi.active,
+.open > .dropdown-toggle.btn-maccabi {
+  background: #cbb203;
+  color: #0a1a47;
+  border-color: #000000;
+}
+
+.modal-maccabi {
+  background: #0a1a47;
+  color: #fee506;
+}
+
+.alert {
+  display: none;
 }

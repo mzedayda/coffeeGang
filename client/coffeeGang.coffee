@@ -15,7 +15,10 @@ Template.mainLayout.helpers
     if Session.get('showInactive')
       return Members.find {}, sort: lastCoffee: 1
     else
-      return Members.find { active: $ne: false }, sort: lastCoffee: 1
+      return Members.find { active: true }, sort: lastCoffee: 1
+  dueMember: ->
+    member = Members.findOne { active: true }, sort: lastCoffee: 1
+    if member? then return member.name else return "No Active Members"
   showInactive: ->
     Session.get 'showInactive'
   username: ->
@@ -32,19 +35,13 @@ Template.mainLayout.events
   'click #logout-btn': (event) ->
     Meteor.loginWithPassword "guest", "guest"
     return false
-  'submit .new-member': (event) ->
-    return false unless Meteor.user()?.username is 'Admin'
-    name = event.target.name.value
-    unless name is ''
-      Members.insert
-        name: name
-        active: true
-        dates: []
-        createdAt: new Date()
-    event.target.name.value = ''
-    return false
-  'change .show-inactive input': (event) ->
-    Session.set 'showInactive', event.target.checked
+  'click .show-inactive': (event) ->
+    if Session.get 'showInactive'
+      $(event.target).removeClass "checked"
+      Session.set 'showInactive', false
+    else
+      $(event.target).addClass "checked"
+      Session.set 'showInactive', true
     return false
 Template.members.helpers
   members: -> 
@@ -85,3 +82,40 @@ memberRowHelpers.dates = ->
 memberRowHelpers.dateToString = ->
   return dateToString @
 Template.member.helpers memberRowHelpers
+
+Template.newMemberForm.events
+  'submit form': (event) ->
+    event.preventDefault();
+    return false unless Meteor.user()?.username is 'Admin'
+    name = event.target.name.value
+    email = event.target.email.value
+    if name.length > 0 and email.length > 0
+      Members.insert
+        name: name
+        email: email
+        active: true
+        dates: []
+        createdAt: new Date()
+    event.target.name.value = ''
+    event.target.email.value = ''
+    $('#newMemberModal').modal('hide')
+    return false
+
+Template.emailForm.events
+  'submit form': (event) ->
+    event.preventDefault();
+    sendBtn = $("#send-email").button('sending')
+    Meteor.call 'sendEmail', (err, result) ->
+      if result.statusCode is 200
+        sendBtn.button('sent')
+        setTimeout ->
+          sendBtn.button('reset')
+        , 2000
+      else if result.statusCode is 400
+        sendBtn.button('reset')
+        $('#alertMessage').text result.body
+        alert = $('.alert').show()
+        setTimeout ->
+          alert.hide()
+        , 1500
+    return false
