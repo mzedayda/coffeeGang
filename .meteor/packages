@@ -27,4 +27,4 @@ ejson
 spacebars
 check
 angularui:angular-ui-router
-iron:router
+meteorhacks:picker

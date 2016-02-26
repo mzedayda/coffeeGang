@@ -14,14 +14,21 @@ select {
 header {
   color: #0a1a47;
   background: #fee407;
-  padding: 20px 15px 15px 15px;
   position: relative;
+  padding: 0 40%;
 }
 
 h1 {
   font-size: 1.5em;
+  margin: 0;
   margin-bottom: 10px;
   text-align: center;
+}
+
+header img {
+  display: block;
+  margin: 0 auto;
+  width: 100px;
 }
 
 form {
