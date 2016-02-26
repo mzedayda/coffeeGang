@@ -1,0 +1,9 @@
+<div class="row memberDetails">
+  <div class="col-md-4">{{member.name}}</div>
+  <div class="col-md-4 sinceLast">{{lastCoffeeDaysSince()}} d Since Last</div>
+  <div class="col-md-4">
+    <ul class="row">
+        <li ng-repeat="date in member.dates" class="col-md-12 date">{{dateToString(date)}}</li>
+    </ul>
+  </div>
+</div>

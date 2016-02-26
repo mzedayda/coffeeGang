@@ -1,0 +1,33 @@
+<body>
+  <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content modal-maccabi">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="notificationModalLabel">Send a Reminder</h4>
+        </div>
+        <form ng-submit="submitNotification()">
+          <div class="modal-body">
+            <div class="form-row">
+              <label for="status">Coffee Status: </label>
+              <div name="status" class="btn-group" data-toggle="buttons" role="group">
+                <label class="btn btn-maccabi"><input type="radio"><i class="fa fa-hourglass"></i> <i class="fa fa-hourglass"></i></label>
+                <label class="btn btn-maccabi"><input type="radio"><i class="fa fa-hourglass"></i> <i class="fa fa-hourglass-end"></i></label>
+                <label class="btn btn-maccabi"><input type="radio"><i class="fa fa-hourglass"></i></label>
+                <label class="btn btn-maccabi"><input type="radio"><i class="fa fa-hourglass-end"></i></label>
+                <label class="btn btn-maccabi"><input type="radio"><i class="fa fa-hourglass-o"></i></label>
+              </div>
+            </div>
+            <div class="alert alert-danger fade in" role="alert">
+              <span id="alertMessage"></span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-maccabi" data-dismiss="modal">Close</button>
+            <input type="submit" id="send-notification" class="btn btn-maccabi" value="Send" data-sending-text="Sending..." data-sent-text="Sent!">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>

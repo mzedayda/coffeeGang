@@ -1,0 +1,52 @@
+<head>
+  <title>coffeeGang</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+</head>
+<body ng-app="coffeeGang" ng-controller="mainCtrl">
+  <div id="mainLayoutContainer">
+    <div class="container col-md-8 col-md-offset-2 col-xs-12">
+      <header class="row">
+        <a href="/"><h1>Coffee Gang 2.0 ({{username() + members.length}})</h1></a>
+      </header>
+      <div id="navbar" class="row navbar navbar-default" role="navigation">
+        <ul id="navbar-ul" class="nav navbar-nav">
+          <li class="button">
+            <input type="checkbox" id="showInactive" ng-model="showInactive">
+            <label id="showInactiveLabel" for="showInactive">
+              <i class="fa fa-user-times" ng-class="{'checked': showInactive}"></i>
+              <span class="nav-detail">Show Inactive Members</span>
+            </label>
+          </li>
+          <li ng-show="adminView()">
+            <div class="button admin-btn" data-toggle="modal" data-target="#newMemberModal">
+              <i class="nav-icon fa fa-user-plus"></i>
+              <span class="nav-detail">Add Member</span>
+            </div>
+            <div id="logout-btn" class="button admin-btn" ng-click="logout()">
+              <i class="nav-icon fa fa-sign-out"></i>
+              <span class="nav-detail">Logout</span>
+            </div>
+          </li>
+          <li ng-hide="adminView()" class="button">
+            <div>
+              <i class="nav-icon fa fa-sign-in"></i>
+              <form class="nav-detail to-admin" ng-submit="submitAdmin(password)">
+                <input id="to-admin-input" ng-model="password" class="form-control" type="password" name="password" placeholder="Log in with admin password" />
+              </form>
+            </div>
+          </li>
+          <li class="button">
+            <div data-toggle="modal" data-target="#notificationModal">
+              <i class="nav-icon fa fa-envelope-o"></i>
+              <span class="nav-detail">Notify {{dueMember()}}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div ui-view=""></div>
+    </div>
+  </div>
+</body>

@@ -1,4 +1,4 @@
-<template name="newMemberForm">
+<body>
   <div class="modal fade" id="newMemberModal" tabindex="-1" role="dialog" aria-labelledby="newMemberModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content modal-maccabi">
@@ -6,16 +6,16 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="newMemberModalLabel">Add a New Coffee Ganger</h4>
         </div>
-        <form>
+        <form ng-submit="addMember(member)">
           <div class="modal-body">
             <div id="new-member-form">
               <div class="input-group input-group-lg">
                 <span class="input-group-addon addon"><i class="icon-user"></i></span>
-                <input type="text" class="form-control" name="name" id="name" placeholder="Name" required/>
+                <input type="text" class="form-control" ng-model= "member.name" name="name" id="name" placeholder="Name" required/>
               </div>
               <div class="input-group input-group-lg">
                 <span class="input-group-addon addon"><i class="icon-envelope"></i></span>
-                <input type="text" class="form-control" name="email" id="email" placeholder="Email" required/>
+                <input type="text" class="form-control" ng-model="member.email" name="email" id="email" placeholder="Email" required/>
               </div>
             </div>
           </div>
@@ -27,4 +27,4 @@
       </div>
     </div>
   </div>
-</template>
+</body>
