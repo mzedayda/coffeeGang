@@ -6,7 +6,7 @@ angular.module("coffeeGang").directive "memberList", ->
   restrict: "E"
   templateUrl: "client/memberList/memberList.html"
   controllerAs: "memberListCtrl"
-  controller: ($scope) ->
+  controller: ["$scope", ($scope) ->
     $scope.helpers
       members: -> Members.find($scope.getReactively("query"), { sort: lastCoffee: 1 })
     $scope.lastCoffeeDate = (member) ->
@@ -32,4 +32,4 @@ angular.module("coffeeGang").directive "memberList", ->
       return false unless $scope.adminView()
       date = new Date()
       Members.update member._id, {$push: {dates: date}, $set: {lastCoffee: date}}
-      return false
+      return false ]

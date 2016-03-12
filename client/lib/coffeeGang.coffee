@@ -7,7 +7,7 @@ Meteor.loginWithPassword "guest", "guest", (err) ->
 
 angular.module("coffeeGang", ["angular-meteor", "ui.router"])
 
-angular.module("coffeeGang").controller "mainCtrl", ($scope) ->
+angular.module("coffeeGang").controller "mainCtrl", ["$scope", ($scope) ->
   $scope.username =  -> Meteor.user()?.username
   $scope.$watch "showInactive", ->
     if $scope.showInactive then $scope.query = {}
@@ -53,3 +53,4 @@ angular.module("coffeeGang").controller "mainCtrl", ($scope) ->
           alert.hide()
         , 3000
     return false
+]

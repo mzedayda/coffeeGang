@@ -1,4 +1,4 @@
-angular.module("coffeeGang").config ($urlRouterProvider, $stateProvider, $locationProvider) ->
+angular.module("coffeeGang").config ["$urlRouterProvider", "$stateProvider", "$locationProvider", ($urlRouterProvider, $stateProvider, $locationProvider) ->
   $locationProvider.html5Mode true
   $stateProvider.state "memberList",
     url: "/memberList"
@@ -7,3 +7,4 @@ angular.module("coffeeGang").config ($urlRouterProvider, $stateProvider, $locati
     url: "/members/:memberName"
     template: "<member></member>"
   $urlRouterProvider.otherwise "/memberList"
+]
